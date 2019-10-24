@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 const ambulancias = require("./routes/api/ambulancias");
 const centrosmedicos = require("./routes/api/centrosmedicos");
