@@ -16,6 +16,8 @@ const pacientes = require("./routes/api/pacientes");
 const eps = require("./routes/api/eps");
 const empresas = require("./routes/api/empresas");
 
+const test = require("./routes/api/test");
+
 
 // Bodyparser middleware
 app.use(
@@ -54,6 +56,8 @@ app.use("/api/pacientes", pacientes);
 app.use("/api/eps", eps);
 app.use("/api/empresas", empresas);
 app.use("/api/centrosmedicos", centrosmedicos);
+
+app.use("/api/test", test);
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);
