@@ -4,7 +4,7 @@ const router = express.Router();
 // @route POST api/test/1
 // @desc Login Ambulancia or Centro Medico and return JWT token
 // @access Public
-router.post("/1", (req, res) => {
+router.get("/1", (req, res) => {
   return res.send("on");
 });
 
