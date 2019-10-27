@@ -46,8 +46,20 @@ const SolicitudSchema = new Schema({
     required: true,
   },
   paciente: {
+    nombre: {
+        type: String
+    },
+    apellido: {
+        type: String
+    },
+    documento: {
+        type: Number
+    },
     edad: {
         type: Number
+    },
+    tipo_sangre: {
+        type: String
     },
     condiciones: [{
         type: String
