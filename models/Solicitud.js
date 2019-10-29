@@ -9,7 +9,7 @@ const RespuestaSchema = new Schema({
         required: true,
     },
     aceptada: {
-        type: Boolean,
+        type: String,
         default: false
     }
 });
