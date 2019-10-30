@@ -103,4 +103,18 @@ router.post("/:idSolicitud", async (req, res) => {
     }
 });
 
+// @route GET api/solicitudes/:idSolicitud/
+// @access Public
+
+router.get("/:idSolicitud", async (req, res) => {
+    
+    try {
+        var result = await Solicitud.findById(req.params.idSolicitud).exec();
+        res.send(result);
+        //console.log(result);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
 module.exports = router;
