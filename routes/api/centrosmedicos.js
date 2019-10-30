@@ -51,6 +51,17 @@ router.post("/register", (req, res) => {
     });
 });
 
+// @route GET api/centrosmedicos/
+// @desc Muestra los centros medicos
+// @access Public
+router.get("/", async (req, res) => {    
+    try {
+        var result = await CentroMedico.find().exec();
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 // router.get("/", (req, res) => { //muestra todos los pacientes en la bd
 //     CentroMedico.mostrarCentrosmedicos(function(err, cm) {

@@ -11,6 +11,9 @@ const RespuestaSchema = new Schema({
     aceptada: {
         type: String,
         default: false
+    },
+    fecha_admision: {
+        type: Date
     }
 });
 /*const PacienteSchema = new Schema({
