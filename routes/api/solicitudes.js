@@ -81,13 +81,9 @@ router.get("/aceptadas/:idCentroMedico", async (req, res) => {
     console.log(req)  
     try {
         var result = await Solicitud.find(
-            {"$and": [
-                {"centros_medicos":
-                { "$elemMatch": 
-                    {id: mongoose.Types.ObjectId(req.params.idCentroMedico), aceptada: "true"}, 
-                  "$ne": {aceptada: "admitido"}
-                }}]
-            });  
+            {"centros_medicos":
+                { "$elemMatch": {id: mongoose.Types.ObjectId(req.params.idCentroMedico), aceptada: "true"}, 
+                  "$not": { "$elemMatch": {aceptada: "admitido"}}}});  
         res.send(result);
     } catch (error) {
         res.status(500).send(error);
