@@ -63,9 +63,11 @@ router.get("/", async (req, res) => {
 // @route GET api/solicitudes/filter
 // @desc Muestra las solicitudes con base en las respuestas del centro médico
 // @access Public
-router.get("/filter/:idCentroMedico", async (req, res) => {    
+router.get("/filter/:idCentroMedico", async (req, res) => {  
+    var date = new Date();
+    date.setSeconds(date.getSeconds()-30);  
     try {
-        var result = await Solicitud.find({ "centros_medicos.id": { "$ne": mongoose.Types.ObjectId(req.params.idCentroMedico)}}).sort({ nivel_triaje: 'asc' });  
+        var result = await Solicitud.find({ "centros_medicos.id": { "$ne": mongoose.Types.ObjectId(req.params.idCentroMedico)}}).where('fecha_creacion').gte(date).sort({ nivel_triaje: 'asc' });  
         res.send(result);
     } catch (error) {
         res.status(500).send(error);
@@ -80,9 +82,12 @@ router.get("/aceptadas/:idCentroMedico", async (req, res) => {
     try {
         var result = await Solicitud.find(
             {"$and": [
-                { "centros_medicos.id": { "$eq": mongoose.Types.ObjectId(req.params.idCentroMedico)}},
-                {"centros_medicos.aceptada": {"$eq": "true"}}, 
-                {"centros_medicos.aceptada": {"$ne": "admitido"}}]});  
+                {"centros_medicos":
+                { "$elemMatch": 
+                    {id: mongoose.Types.ObjectId(req.params.idCentroMedico), aceptada: "true"}, 
+                  "$ne": {aceptada: "admitido"}
+                }}]
+            });  
         res.send(result);
     } catch (error) {
         res.status(500).send(error);
