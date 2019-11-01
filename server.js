@@ -18,6 +18,11 @@ const empresas = require("./routes/api/empresas");
 
 const test = require("./routes/api/test");
 
+const swaggerUi = require('swagger-ui-express'),
+     swaggerDocument = require('./openapi.json');
+
+
+
 
 // Bodyparser middleware
 app.use(
@@ -58,6 +63,8 @@ app.use("/api/empresas", empresas);
 app.use("/api/centrosmedicos", centrosmedicos);
 
 app.use("/api/test", test);
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);

@@ -1,0 +1,334 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "description": "This is an API documentation using Initiative Open API. You can find out more about Swagger at [http://swagger.io](http://swagger.io) and about Ambulapp on [Backend-Ambulapp, Github](https://github.com/ricardonior29/ambulapp_backend) and [Ambulapp, Github](https://github.com/ricardonior29/ambulapp_frontend).",
+    "title": "Ambulapp Open Api",
+    "contact": {
+      "email": "ambulapp@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://ambulapp-main-server.herokuapp.com/api"
+    },
+    {
+      "url": "https://replica-ambulapp.herokuapp.com/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "login",
+      "description": "Acces to Ambulances and Medical Centers"
+    },
+    {
+      "name": "register",
+      "description": "Ambulance and Medical Center signup"
+    },
+    {
+      "name": "solicitud",
+      "description": "Operations about patient request"
+    },
+    {
+      "name": "centrosmedicos",
+      "description": "Access to Medical Centers data"
+    }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "description": "Ambulances and Medical Centers login",
+        "operationId": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginKeys"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResAuth"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username or password value"
+          }
+        }
+      }
+    },
+    "/ambulancias/register": {
+      "post": {
+        "tags": [
+          "register"
+        ],
+        "description": "Ambulance register",
+        "operationId": "registerAmb",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ambulancia"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/centrosmedicos/register": {
+      "post": {
+        "tags": [
+          "register"
+        ],
+        "description": "Medical Center register",
+        "operationId": "registerCen",
+        "requestBody": {
+          "content": {
+            "pplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CentroMedico"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/solicitudes/nueva": {
+      "post": {
+        "tags": [
+          "solicitud"
+        ],
+        "description": "Create a new request",
+        "operationId": "newRequest",
+        "requestBody": {
+          "content": {
+            "pplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Solicitud"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/centrosmedicos": {
+      "get": {
+        "tags": [
+          "centrosmedicos"
+        ],
+        "description": "Create a new request",
+        "operationId": "GetCM",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CentroMedico"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginKeys": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "ResAuth": {
+        "type": "object",
+        "properties": {
+          "isambulance": {
+            "type": "boolean"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "Ambulancia": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "password2": {
+            "type": "string"
+          }
+        }
+      },
+      "CentroMedico": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "direccion": {
+            "type": "string"
+          },
+          "latitud": {
+            "type": "number"
+          },
+          "longitud": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Solicitud": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "triaje": {
+            "type": "number"
+          },
+          "latitud": {
+            "type": "number"
+          },
+          "longitud": {
+            "type": "number"
+          },
+          "valoracion": {
+            "type": "string"
+          },
+          "ambulancia": {
+            "type": "string"
+          },
+          "paciente": {
+            "type": "object",
+            "properties": {
+              "edad": {
+                "type": "number"
+              },
+              "condiciones": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "nombre": {
+                "type": "string"
+              },
+              "apellido": {
+                "type": "string"
+              },
+              "documento": {
+                "type": "number"
+              },
+              "tipo_sangre": {
+                "type": "number"
+              }
+            }
+          },
+          "centros_medicos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "items": {
+                "properties": {
+                  "aceptada": {
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Access token is missing or invalid"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
