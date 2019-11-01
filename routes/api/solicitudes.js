@@ -48,8 +48,8 @@ router.post("/nueva", (req, res) => {
 // @access Public
 router.get("/", async (req, res) => {
     var date = new Date();
-    //.setMinutes(date.getMinutes()-1);
-    date.setDate(date.getDay() - 3);
+    date.setSeconds(date.getSeconds()-30);
+   // date.setDate(date.getDay() - 3);
     console.log(date.toLocaleString());
     
     try {
@@ -95,7 +95,7 @@ router.get("/aceptadas/:idCentroMedico", async (req, res) => {
 // @body: idCentroMedico, respuesta
 
 router.post("/:idSolicitud", async (req, res) => {
-    const respuesta = {"id": req.body.id, "aceptada": req.body.aceptada};
+    const respuesta = {"id": req.body.id, "aceptada": req.body.aceptada, "fecha_admision": req.body.fecha_admision};
     console.log(respuesta);
     
     try {
