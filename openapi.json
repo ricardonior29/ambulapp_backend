@@ -159,8 +159,8 @@
         "tags": [
           "centrosmedicos"
         ],
-        "description": "Create a new request",
-        "operationId": "GetCM",
+        "description": "Returns the list of Medical Centers ",
+        "operationId": "getlist",
         "responses": {
           "200": {
             "description": "Successful operation",
